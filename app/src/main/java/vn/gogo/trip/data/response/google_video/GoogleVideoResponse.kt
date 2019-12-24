@@ -1,7 +1,10 @@
 package vn.gogo.trip.data.response.google_video
 
+import com.squareup.moshi.Json
+
 data class GoogleVideoResponse(
-    var googlevideos:List<Googlevideo> = listOf()
+    @field:Json(name = "googlevideos")
+    var googlevideoList:List<Googlevideo> = listOf()
 )
 
 data class Googlevideo(

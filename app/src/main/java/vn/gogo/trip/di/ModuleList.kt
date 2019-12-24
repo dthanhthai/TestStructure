@@ -7,6 +7,7 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import vn.gogo.trip.data.constant.RemoteConstant
 import vn.gogo.trip.data.remote.ServiceRetrofitBuilder
 import vn.gogo.trip.data.remote.service.TestApiService
@@ -20,6 +21,7 @@ import vn.gogo.trip.ui.main.MainActivityViewModel
 private const val DI_AUTH_HEADER_INTERCEPTOR = "DI_AUTH_HEADER_INTERCEPTOR"
 const val DI_RETROFIT_CLIENT = "DI_RETROFIT_CLIENT"
 const val DI_CONVERTER_GSON = "DI_CONVERTER_GSON"
+const val DI_CONVERTER_MOSHI = "DI_CONVERTER_MOSHI"
 const val DI_API_BASE_URL = "DI_API_BASE_URL"
 const val DI_TEST_GOOGLE_VIDEO_SERVICE = "DI_TEST_GOOGLE_VIDEO_SERVICE"
 
@@ -49,6 +51,11 @@ val koinModuleList = module {
     single(named(DI_CONVERTER_GSON)) {
         GsonConverterFactory.create()
     }
+
+    single(named(DI_CONVERTER_MOSHI)) {
+        MoshiConverterFactory.create()
+    }
+
     single(named(DI_API_BASE_URL)) { BaseUrl(url = RemoteConstant.baseUrl) }
 
     single {
@@ -66,7 +73,7 @@ val koinModuleList = module {
         ServiceRetrofitBuilder(
             baseOkHttpClintBuilder = get(),
             defaultBaseUrl = get(named(name = DI_API_BASE_URL)),
-            converterFactory = get(named(name = DI_CONVERTER_GSON))
+            converterFactory = get(named(name = DI_CONVERTER_MOSHI))
         ).build<TestApiService>()
     }
 

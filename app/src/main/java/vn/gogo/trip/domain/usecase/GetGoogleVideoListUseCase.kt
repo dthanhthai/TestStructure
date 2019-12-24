@@ -14,7 +14,7 @@ class GetGoogleVideoListUseCase(private val repository: IGoogleVideoRepository) 
     override suspend fun execute(): UseCaseResult<GoogleVideoResponse> {
         return try {
             val responseData = repository.getGoogleVideo()
-            if (responseData.googlevideos.isNotEmpty()) {
+            if (responseData.googlevideoList.isNotEmpty()) {
                 UseCaseResult.Success(responseData)
             } else {
                 UseCaseResult.Error(Throwable("Error: data is empty!"))
