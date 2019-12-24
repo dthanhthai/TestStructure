@@ -6,7 +6,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Converter
 import retrofit2.Retrofit
 
-class BaseRetrofitBuilder(
+class RetrofitBuilder(
     val baseOkHttpClintBuilder: OkHttpClient.Builder,
     val converterFactory: Converter.Factory,
     val defaultBaseUrl: BaseUrl
