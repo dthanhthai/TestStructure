@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun bindViewModel() {
         observe(viewmodel.googleVideoList) {
-            Toast.makeText(this, "Size: ${it!!.googlevideoList.size}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Size: ${it.googlevideoList.size}", Toast.LENGTH_SHORT).show()
             for (cate in it.googlevideoList) {
                 Log.d("TestLog", "Category: ${cate.category}")
                 for (video in cate.videos) {
