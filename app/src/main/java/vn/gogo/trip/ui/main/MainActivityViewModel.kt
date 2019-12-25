@@ -4,11 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.launch
 import vn.gogo.trip.data.response.google_video.GoogleVideoResponse
 import vn.gogo.trip.domain.base.ResultWrapper
-import vn.gogo.trip.domain.base.UseCaseResult
-import vn.gogo.trip.domain.usecase.IGetGoogleVideoListUseCase
+import vn.gogo.trip.domain.usecase.GetGoogleVideoListUseCase
 import vn.gogo.trip.ui.base.BaseViewModel
 
-class MainActivityViewModel(private val getGoogleVideoUseCase: IGetGoogleVideoListUseCase) :
+class MainActivityViewModel(private val getGoogleVideoUseCase: GetGoogleVideoListUseCase) :
     BaseViewModel() {
     var googleVideoList = MutableLiveData<GoogleVideoResponse>()
 

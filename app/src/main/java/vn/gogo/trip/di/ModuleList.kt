@@ -11,10 +11,10 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import vn.gogo.trip.data.constant.RemoteConstant
 import vn.gogo.trip.data.remote.ServiceRetrofitBuilder
 import vn.gogo.trip.data.remote.service.TestApiService
+import vn.gogo.trip.data.repositoty.google_video.GoogleVideoRepositoryImpl
 import vn.gogo.trip.data.repositoty.google_video.GoogleVideoRepository
-import vn.gogo.trip.data.repositoty.google_video.IGoogleVideoRepository
+import vn.gogo.trip.domain.usecase.GetGoogleVideoListUseCaseImpl
 import vn.gogo.trip.domain.usecase.GetGoogleVideoListUseCase
-import vn.gogo.trip.domain.usecase.IGetGoogleVideoListUseCase
 import vn.gogo.trip.ui.main.MainActivityViewModel
 
 //-DI NAME
@@ -23,7 +23,6 @@ const val DI_RETROFIT_CLIENT = "DI_RETROFIT_CLIENT"
 const val DI_CONVERTER_GSON = "DI_CONVERTER_GSON"
 const val DI_CONVERTER_MOSHI = "DI_CONVERTER_MOSHI"
 const val DI_API_BASE_URL = "DI_API_BASE_URL"
-const val DI_TEST_GOOGLE_VIDEO_SERVICE = "DI_TEST_GOOGLE_VIDEO_SERVICE"
 
 val koinModuleList = module {
 
@@ -33,12 +32,12 @@ val koinModuleList = module {
 
     //-DI USECASE BELOW HERE
 
-    factory<IGetGoogleVideoListUseCase> { GetGoogleVideoListUseCase(repository = get()) }
+    factory<GetGoogleVideoListUseCase> { GetGoogleVideoListUseCaseImpl(repository = get()) }
 
     //-DI REPOSITORY BELOW HERE
 
-    factory<IGoogleVideoRepository> {
-        GoogleVideoRepository(service = get(named(DI_TEST_GOOGLE_VIDEO_SERVICE)))
+    factory<GoogleVideoRepository> {
+        GoogleVideoRepositoryImpl(service = get())
     }
 
     //-DI API BELOW HERE
@@ -69,7 +68,7 @@ val koinModuleList = module {
         ).build()
     }
 
-    single(named(DI_TEST_GOOGLE_VIDEO_SERVICE)) {
+    single {
         ServiceRetrofitBuilder(
             baseOkHttpClintBuilder = get(),
             defaultBaseUrl = get(named(name = DI_API_BASE_URL)),
